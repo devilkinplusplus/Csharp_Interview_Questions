@@ -322,8 +322,54 @@ public class Audi:Car{ //error sealed classlardan miras almaq olmaz
 * Internal — Bir dəyərin internal olaraq tanımlanması , o dəyərin yalnız eyni proyektdən əlçatılan olması deməkdir.
 * Protected Internal — Bir dəyərin protected internal olaraq tanımlanması , o dəyərin aid olduğu sinif , onun alt sinifləri və hətta onun digər proyektdəki alt sinifindən əlçatılan olması deməkdir.
 
+14) **Value type və referance type nədir və hansılardır?**
+> C#-da tiplər yaddaşda tutduğu yerə görə 2 yerə bölünür _value tiplər_ və _referance tiplər_.
+> Value typelar yaddaşda stack adlanan hissədə tutulur. Value typelar aşağıdakılardır:
+* int                                    
+* double                   
+* decimal                  
+* float                      
+* byte
+* bool
+* char
+* struct
+* enum
+> Referans tiplər isə yaddaşın heap hissəsində saxlanılır, lakin onların stackda unikal adresləri olur,heapdakı referans tipə keçid məhz stack bölməsindəki unikal adresdən keçir. Referans typelar əsasən `new` açar sözü ilə yaradılan obyektlərdir.
+* Object
+* Class
+* Interface
+* string
+* array (hər tipdən olan arraylar bura daxildir)
+* List
 
+![ValueVsRef](https://user-images.githubusercontent.com/96441243/218277073-5966810f-e6a1-46c6-9bd4-ac6a1056ec54.png)
+> Şəkildən gördüyümüz kimi referans tiplərin adresləri stackda saxlanılır 
 
+```
+int num1;
+int num2 = 12;
 
+num1 = num2; // num1-in yeni dəyəri 12 olacaq
+num2 = 19;  // num2-nin yeni dəyəri 19 olacaq amma num1-in dəyəri dəyişməyəcək,çünki o bir value typedır!
+```
+
+```
+string[] cities = new string[]{"Bakı","Masallı","Sumqayıt"}; // array referans tipdir heapda saxlanılacaq,amma unikal adresi stackdadır
+
+string[] cities2 = new string[]{"Gəncə","Lənkəran","Şamaxı"}; // başqa bir referans tipli obyekt
+
+cities = cities2; // İki referansı tipi bir-birinə mənimsədən zaman onların stackdəki adreslərini eyni referansa yönəltmiş oluruq
+```
+
+![valref2](https://user-images.githubusercontent.com/96441243/218277772-2b0fb5c9-764a-49fc-8a9f-0ce0cadb8ae1.png)
+> `cities = cities2` nəticəsi şəkildəki kimi olacaq , 2 adres də eyni referansa yönələcək. Nümunəyə davam edək..
+```
+cities[0] = "Naxçıvan";
+```
+> Bu zaman hər iki adres eyni referansı göstərdiyindən `cities[0]="Naxçıvan"` yazdıqdan sonra eyni dəyər `cities2` arrayında da dəyicək.
+```
+Console.WriteLine(cities2[0]); // Naxçıvan
+```
+> Bəs `cities` arrayının heapdakı referansına ({"Bakı","Masallı","Sumqayıt"}) nə olacaq ? Bu zaman Garbage Collector dediyimiz obyekt heapda adresi olmayan bütün referansları siləcək.
 
 
