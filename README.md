@@ -187,6 +187,7 @@ Burada üst sinif olan `Animal` hər obyektə görə müxtəlif davranış göst
 * Static class
 * Sealed class
 * Partial class
+<br>
 (Hər biri haqqında ətraflı məlumat verilib)
 
 7) **Abstract classlar və interfacelər arasındakı fərqlər nələrdir?**
