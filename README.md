@@ -1,4 +1,4 @@
-# C# Müsahibə sualları
+# C# Müsahibə sualları (Interview Questions)
 
 1) **C# nədir ?**
 > C# Microsoft tərəfindən 2001-ci ildə yaradılan obyekt yönümlü proqramlaşdırma dilidir. C# proqramlaşdırma dili C və C++ dillərinin üstün tərəflərini alaraq 
@@ -92,9 +92,8 @@ class Person{
       }
    } 
 }
-
 ```
-Bildiyimiz kimi propertilerdeki set bloku dəyər mənimsədən zaman işə düşür,biz də həmin dəyərin 0-dan böyük olduğu vəziyyəti yoxlayıb neticeni ona görə qaytardıq,artıq bu halda istifadəçi `age` dəyişəninə mənfi dəyərlər mənimsədə bilməz (əks halda 0 nəticəsini qaytaracaqdır).
+Bildiyimiz kimi propertilerdeki set bloku dəyər mənimsədən zaman işə düşür,biz də həmin dəyərin 0-dan böyük olduğu vəziyyəti yoxlayıb neticeni ona görə qaytardıq,artıq bu halda istifadəçi `age` dəyişəninə mənfi dəyərlər mənimsədə bilməz (əks halda 0 nəticəsi alacağıq).
 
 ***Inheritance (Mirasalma)*** <br>
 Bizim siniflərimiz sayca çox olacaq.Bənzər xüsusiyyətlərə sahib siniflərin içərisində eyni kodu təkrar-təkrar yazmaq yerinə həmin kodları üst sinifdən (Base class) miras almaq daha əlverişli olacaq.
@@ -182,8 +181,145 @@ Animal a3 = new Cat();
 ```
 Burada üst sinif olan `Animal` hər obyektə görə müxtəlif davranış göstərir yəni çox yönümlü olur. 
 
+6) **C#-da hansı növ siniflər (class) mövcuddur?**
+> C#-da aşağıdakı növdə siniflər (class) mövcuddur:
+* Abstract class
+* Static class
+* Sealed class
+* Partial class
+(Hər biri haqqında ətraflı məlumat verilib)
 
+7) **Abstract classlar və interfacelər arasındakı fərqlər nələrdir?**
 
+Abstract class| Interface
+------------- | -------------
+Constructoru olur  | Constructoru olmur
+Static dəyərlər ala bilər | Static dəyərlər ala bilməz
+Abstract classlardakı elementlər bütün access modifierslərlə işlənə bilər (abstract metodlar private ola bilmaz) | Access modifiersi yalnız public ola bilər
+Bir sinif yalnız bir abstract classı miras ala bilər | Bir sinif birdən çox interfeysi miras ala bilər
+Bir çox sinif eyni tipdən və ortaq davranış göstərirsə abstract sinif base class olaraq istifadə edilər | Bir çox sinif yalnız ortaq metodlar istifadə edirsə interfeys istifadə etmək lazımdır
+Abstract classlar metod,properti,fields,consts və s. elementlər ala bilir | Interfeyslər yalnız metodlarla işlənir
+Abstract classdan miras alan alt siniflər yalnızca bu sinifdəki abstract açar sözlü metodları implement etmelidir | Interfeysdən miras alan siniflər interfeysin bütün metodlarını implement etmelidir
+
+8) **Virtual metodlar nədir?**
+> Bir metodun ``virtual`` açar sözü ilə işarələnməsi o metodun alt siniflərdə dəyişdirilib fərqli davranış göstərə biləcəyi mənasına gəlir.
+
+```
+ public class Car
+ {
+    public virtual void Start()
+    {
+        Console.WriteLine("Car started");
+    }
+ }
+
+ public class Audi : Car
+ {
+    public override void Start()
+    {
+        Console.WriteLine("Audi started");
+    }
+ }
+```
+> Yuxarıdakı nümunədə base classda olan `Start` metodu onun alt sinifində fərqli şəkildə davranış göstərdi, bunun üçün `override` açar sözündən istifadə etmək lazımdır.
+> Onu da unutmayaq ki, metodu `override` etmək kimi bir məcburiyyətimiz yoxdur,yəni `Start` metodunu `Audi` sinifində dəyişmək kimi bir məcburiyyətimiz yoxdur.
+
+9) **Metodun override edilməsi nədir?**
+> Metodun override edilməsinə metodun əzilməsi də deyirlər, mənası da üst siniflərdə olan metodun alt siniflərdə dəyişdirilərək istifadə edilməsidir. 
+> Unutmayaq ki,yalnız `virtual` açar sözü ilə işarələnmiş metodları əzə (dəyişdirə) bilərik.
+
+10) **Metodun overload edilməsi nədir?**
+> Bu sual metodun override edilməsi ilə qarışdırılmamalıdır. Override metodu əzmək idisə, overload metodun artıq yüklənməsidir.
+> Yəni bir sinifdə var olan bir metodu həmin sinifdə eyni ad altında yenidən yarada bilərik amma necə?
+> Bunun üçün bəzi şərtlər var təbii ki birəbir eyni imza ilə 2 eyni metodu yarada bilmərik.
+
+```
+class Math{
+  public void Sum(int a,int b){
+    //code
+  }
+
+  public void Sum(int a,int b){ //error 2 eyni imzaya sahib metod ola bilməz
+    //code
+  }
+}
+```
+> O zaman nə edəcəyik,təbii ki, imzalarını dəyişdirəcəyik.
+> Məsələn, birinci metod 2 parametr alıbsa 2-ci Sum metodu 3 parametr ala bilər yaxud ilk metodun parametrləri `int` tipində olub 2-ci metodun parametrləri `double` ola bilər. Bu hallarda eyni ad ilə xəta almadan metodlarımızı yarada bilərik,buna da metodun overload edilməsi deyilir.
+
+```
+class Math{
+  void Sum(int a, int b)
+  {
+  //code
+  }
+  void Sum(int a, int b, int c)
+  {
+  //code
+  }
+}
+```
+yaxud
+```
+class Math{
+  void Sum(double a, double b)
+  {
+  //code
+  }
+  void Sum(int a, int b)
+  {
+  //code
+  }
+}
+```
+> hətta geri dönüş tipini də dəyişərək etmək mümkündür
+```
+class Math{
+  void Sum(double a, double b)
+  {
+  //code
+  }
+  int Sum(int a, int b)
+  {
+  //code
+  }
+}
+```
+11) **Static metodlar nədir?**
+> Static metodlar obyekt ilə deyil birbaşa sinifin adı ilə müraciət edilən metodlardır. Bu metodlar çağırılan zaman obyekt yaradılmadığından constructor işə düşməyəcək.
+> Static metodlar `static` açar sözü ilə yaradılır və yalnız static classlarda mövcud ola bilir.
+
+```
+public static class Math{
+  public static int Sum(int num1,int num2){
+    return num1+num2;
+  }
+}
+```
+> Çağırılan zaman aşağıdakı şəkildə sinifin adı ilə çağırılır.
+```
+Math.Sum(2,3);
+```
+
+12) **Sealed classlar nədir?**
+> `Sealed` açar sözü ilə tanımlanmış classlar miras alma xüsusiyyətini bloklayır. Yəni bu şəkildə tanımladığımız classlardan artıq miras ala bilmərik.
+
+```
+public sealed class Car{
+  //methods & properties
+}
+
+public class Audi:Car{ //error sealed classlardan miras almaq olmaz
+}
+```
+12) **Access modifierlar nədir və hansılardır?**
+> Access Modifier-lar kodda xarici müdaxilənin sərhədlərini müəyyən etmək üçün istifadə olunan əsas ifadələrdir. 
+> C#-da aşağıdakı access modiferlar mövcuddur:
+* Private — Bir dəyərin private olaraq tanımlanması , o dəyərin yalnız aid olduğu sinifdən əlçatılan olması mənasına gəlir.
+* Public — Bir dəyərin public olaraq tanımlanması , o dəyərin istənilən yerdən əlçatılan olması deməkdir. Public-də məhdudiyyət yoxdur.
+* Protected — Bir dəyərin protected olaraq tanımlanması , o dəyərin aid olduğu sinifdən və o sinifi miras alan alt siniflərdən əlçatılan olması deməkdir.
+* Internal — Bir dəyərin internal olaraq tanımlanması , o dəyərin yalnız eyni proyektdən əlçatılan olması deməkdir.
+* Protected Internal — Bir dəyərin protected internal olaraq tanımlanması , o dəyərin aid olduğu sinif , onun alt sinifləri və hətta onun digər proyektdəki alt sinifindən əlçatılan olması deməkdir.
 
 
 
