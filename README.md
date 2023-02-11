@@ -313,7 +313,7 @@ public sealed class Car{
 public class Audi:Car{ //error sealed classlardan miras almaq olmaz
 }
 ```
-12) **Access modifierlar nədir və hansılardır?**
+13) **Access modifierlar nədir və hansılardır?**
 > Access Modifier-lar kodda xarici müdaxilənin sərhədlərini müəyyən etmək üçün istifadə olunan əsas ifadələrdir. 
 > C#-da aşağıdakı access modiferlar mövcuddur:
 * Private — Bir dəyərin private olaraq tanımlanması , o dəyərin yalnız aid olduğu sinifdən əlçatılan olması mənasına gəlir.
