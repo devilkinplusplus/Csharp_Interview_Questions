@@ -372,4 +372,31 @@ Console.WriteLine(cities2[0]); // Naxçıvan
 ```
 > Bəs `cities` arrayının heapdakı referansına ({"Bakı","Masallı","Sumqayıt"}) nə olacaq ? Bu zaman Garbage Collector dediyimiz obyekt heapda adresi olmayan bütün referansları siləcək.
 
+15) **Garbage collector nədir?**
+> Obyekt yönümlü proqramlaşdırma dillərində mövcud olan Garbage Collectorun vəzifəsi heap bölməsində işini tamamlamış obyektlərin referanslarını təmizləməkdir.
+> Bir sinifdən obyekt yaratdığımız zaman heap bölməsində onun üçün yer ayırılır,bu obyektin işi bitdikdən sonra Garbage Collector avtomatik olaraq həmin obyektin referansını heapdan təmizləyir.
+
+> Garbage Collector yalnız heap bölməsində fəaliyyət göstərir!
+
+16) **Constructor metod nədir?**
+> Bir classdan obyekt yaradılarkən ilk işə düşən metodlardır. Constuctor public olmalı, class adı ilə eyni olmalıdır və constuctor metodların geri dönüş tipləri yoxdur.
+```
+MyClass myObj = new MyClass();  
+```
+> `new`-dən sonra `MyClass()` referansını çağırdıq və bildiyimiz kimi `()` mötərizə C# və Java kimi obyekt yönümlü dillərdə yalnız metodlarda istifadə olunur. Myclass-dan sonra gələn mötərizələr bəs hansı metodu aktivləşdirir? Məhz constructor metodları..
+> Beləliklə, constuctor metodlar `new` açar sözü ilə obyket yaradılarkən ilk işə düşən metodlardır. 
+> Obyekt yaradılarkən constructor metodlar mütləq işə düşür!
+```
+class MyClass{
+  public MyClass(){
+    // obyekt yaradılarken ilk bura çalışır
+  }
+}
+```
+> Hər classda biz yazmasaq da, default olaraq boş bir constuctor mövcuddur.
+> ***Constructor metod private olarsa, həmin sinifdən obyekt yaratmaq mümkün olmayacaq,çünki obyekt yaradılarkən mütləq constuctor metod işə düşməlidir,amma access modifiersi private olarsa , constructor metoda kənardan əlçatmaq mümkün olmayacağından ötrü obyekt yarada bilməyəcəyik.***
+
+
+
+
 
