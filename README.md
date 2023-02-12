@@ -432,7 +432,7 @@ class MyClass{
   * Dispose metodu yaddaşdakı obyekti təmizləmək üçün _manuel_ olaraq istifadə edilir. 
   * Finalize metodu isə yaddaşdakı obyekti təmizləmək üçün  _Garbage Collector_ tərəfindən istifadə edilir.
 * Dispose metodu manuel olaraq istifadə edildiyindən Garbage Collectora görə daha performanslı çalışır.
-* Digər tərəfdən Finalize metodu Garbage Colelctor tərəfindən çağırılırdığından performans baxımından yavaşdır.
+* Digər tərəfdən Finalize metodu Garbage Collector tərəfindən çağırılırdığından performans baxımından yavaşdır.
 * Garbage collectorun nə zaman çalışacağı naməlumdur, bu da təhlükəsizlik baxımından risklidir.
 > Bu səbəblərdən C# -da Dispose metodunu istifadə etməyimiz tövsiyə edilir.
 
@@ -474,6 +474,107 @@ using Models.Entities;
 Product prod = new();
 ```
 > Bu nümunədə /Models/Entities adresindəki/namespaceindəki sinifləri import etdik və artıq cari sinifdə istifadə edə bilərik.
+
+## 21) Managed və Unmanaged kod nədir?  ##
+> Managed kod .Net framework içərisindəki CLR(Common Language Runtime) tərəfindən idarə olunan koddur.
+> Managed code C# kimi .Net dəstəkli dillər tərəfindən yazılır ve Intermediate Language (IL) olaraq compile edilir,daha sonra CLR tərəfindən idarə olunur.
+> CLR yaddaşın idarəsi, xəta idarəsi (exception handling) və digər sistem səviyyəli xidmətləri bu kodlarda (managed) üzərinə götürür.
+
+> Unmanaged code isə .Net frameworkdən və CLR nəzarətindən kənar kodlardır,hansı ki bu kodlar .Net dəstəkli dillərdən birində yazılmayıb,bu cür kodlar birbaşa əməliyyat sistemi tərəfindən compile edilir. Bu kodlar CLR-ın nezaretinden kənar olduğundan belə kodlarda xəta idarəsi,yaddaşın idarəsi və s. xidmətlər proqramçı tərəfindən manuel olaraq həyata keçirilməlidir.
+
+## 22) C#-da class və struct arasındakı fərqlər nələrdir? ##
+> C#-da həm siniflər, həm də structlar fərdi data tiplərini müəyyən etmək üçün istifadə olunur, lakin onların bəzi əsas fərqləri var.
+
+Class  | Struct
+------------- | -------------
+Class referance typedır və Heapda saxlanılır  | Structlar isə value typedır və Stackdə saxlanılır
+Classlar inheritance və polymorphismi dəstəkləyir  | Structlar isə inheritance və polymorphismi dəstəkləmir
+Classlar Abstract olaraq tanımlana bilərlər | Structlar abstract ola bilməz
+Classların bütün üzvləri default olaraq private olur | Structlarda isə üzvlər default olaraq public olur
+Classlar referance type olduğundan yaddaş idarəsində Garbage Collectordan istifadə edə bilir | Structlar value type olduğundan Garbage Collectordan istifadə edə bilmir
+Classlar böyük və mürəkkəb modellər üçün daha uyğundur | Structlar isə kiçik həcmli modellər üçün uyğundur.
+
+## 23) Enum nədir? ##
+> Proqram içində istifadə edilən sabitlərə mənalı adlar verilməsi məqsədilə bu sabitləri bir qrup altında toplaya bilərik. Bu cür qruplara enum (enumeration) deyilir.
+> Enumlar value typedır ,buna görə də yaddaşın stack bölməsində saxlanılır. Enumun istifadəsinə aid bir nümunə aşağıdakı kimidir:
+```
+public enum DaysOfWeek
+{
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+```
+> Enumlarda ilk deyer default olaraq 0-dan başlayır, amma bunu dəyişmək mümkündür.
+```
+public enum DaysOfWeek
+{
+    Monday = 1,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+```
+> Çağırarkən isə bu cür çağırılacaq:
+```
+DaysOfWeek day = DaysOfWeek.Monday;
+```
+## 24) C# -da boxing və unboxing nədir? ##
+> Boxing - bir value tipin referans tipə çevirilməsi, unboxing isə referans tipin value tipə çevirilməsidir.
+
+**Boxing**
+* Value tip (int,float,char və s.) dəyişənin referans tipə (object) çevirilməsidir.
+```
+int num = 10;
+Object obj = num; // boxing
+```
+> Üstdəki kod nəticəsində `num` dəyişəni value tip olduğundan stackda saxlanılacaq, `obj` dəyişəni isə referans tip olduğundan heap bölməsində tutulacaq.
+
+**Unboxing**
+* Referans tip dəyişənin value tipə çevirilməsidir.
+```
+Object obj = 41;
+int i = (int)obj; // unboxing zamanı xeta ilə qarşılaşsaq casting istifade edeceyik
+```
+
+## 25) C# -da partial classlar hansılardır? ##
+> Siniflərin həddindən artıq böyüdüyü hallarda həmin sinifi bölüb idarə etməkdir.
+> Partial classlar bizə bir sinifi birdən çox sinifə bölməyimizə, constructor , metod, dəyişən , properti və s. səliqəli şəkildə ayırmağımıza imkan verir.Fiziki olaraq birdən çox parçaya bölünmüş siniflər çalışma zamanında tək bir sinif kimi hərəkət edir.
+
+```
+public partial class Car
+{
+    public Car()
+    {
+       //codes
+    }
+}
+
+public partial class Car
+{
+    public string Name { get; set; }
+    public string Color { get; set; }
+}
+
+public partial class Car
+{
+    void Start()
+    {
+        //codes
+    }
+}
+```
+> Yuxarıdakı nümunədə `Car` sinifini 3 yerə bölüb constructor,properti və metodlara görə ayırdıq. Buna baxmayaraq `Car` sinifi vahid bir sinif kimi davranır.
+> Fərqli partial classlarda eyni adlı metod yaxud dəyişən yarada bilmərik eynilə normal siniflərdə olduğu kimi. Unutmayaq partial classlar normal classlar kimi davranır,normal classlarda edilən hər əməliyyat burada da edilə bilər.
+
+
 
 
 
