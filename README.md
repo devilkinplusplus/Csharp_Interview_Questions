@@ -1,4 +1,4 @@
-# C# Müsahibə sualları (Interview Questions)
+# C# Müsahibə sualları (Interview Questions by Ilkin Rufullayev)
 
 ## 1) C# nədir ? ##
 > C# Microsoft tərəfindən 2001-ci ildə yaradılan obyekt yönümlü proqramlaşdırma dilidir. C# proqramlaşdırma dili C və C++ dillərinin üstün tərəflərini alaraq 
