@@ -1,11 +1,11 @@
 # C# Müsahibə sualları (Interview Questions)
 
-1) **C# nədir ?**
+## 1) C# nədir ? ##
 > C# Microsoft tərəfindən 2001-ci ildə yaradılan obyekt yönümlü proqramlaşdırma dilidir. C# proqramlaşdırma dili C və C++ dillərinin üstün tərəflərini alaraq 
 > yaradılıb. Hazırda .Net platformunda ən çox istifadə edilən proqramlaşdırma dilidir. C# ilə web proqramlaşdırma,oyun proqramlaşdırma,masaüstü proqramlar 
 > yazmaq və hətta mobile proqramlaşdırma da mümkündür.
 
-2) **Sinif (class) nədir?**
+## 2) Sinif (class) nədir? ##
 > Siniflər dəyişənlərı,metodları,propertiləri yığdığımız bir yerdir. Bu metodlari,dəyişənləri istifadə etmək üçün isə həmin sinifdən obyekt yaradılmalıdır.
 > Sinifə bir nümunə olaraq İnsanı göstərə bilərik.
 > İnsandakı xüsusiyyətlər məs. göz rəngi,adı,yaşı dəyişənlərimiz,onun danışması,gülməsi,qaçması kimi feili hərəkətləri isə metodlarımız olsun.
@@ -27,7 +27,7 @@ class Person{
 }
 ```
 
-3) **Obyekt (object) nədir?**
+## 3) Obyekt (object) nədir? ##
 > Obyekt bir sinifdən yaradılan və yaddaşda yer tutan bir verilən strukturudur. Obyekt sinifin nümunəsidir,sinifin içərisində tanımlanılan metodlara,
 > dəyişənlərə və s. obyektlər vasitəsilə çatmaq mümkündür.Obyektlər siniflərdə yazdığımız xüsusiyyətlərə,metodlara sahib olur. 
 > Sinifdən bir obyekt yaratmaq üçün `new` açar sözündən istifadə edilir.
@@ -39,7 +39,7 @@ class Person{
   ```
   
 
-4) **C# propertilər nədir?**
+## 4) C# propertilər nədir? ##
 > C#-da propertilər dəyişənlərə çox bənzəyir lakin adi dəyişənlərdən fərqli olaraq get və set bloklarına malikdir. 
 > Bu bloklar dəyərin oxunması və mənimsədilməsi zamanı çalışır.
 > Məsələn , propertiyə dəyər mənimsədərkən set blokları çalışır , set blokları vasitəsi ilə mənimsədilən dəyər üzərində müəyyən əməliyyatlar icra etdikdən
@@ -59,7 +59,7 @@ class Person{
   
 ```
 
-5) **OOP prinsipləri hansılardır?**
+## 5) OOP prinsipləri hansılardır? ##
 > Obyekt yönümlü proqramlaşdırmada 4 əsas prinsip mövcuddur.
 
 * Encapsulation (Kapsullama)
@@ -181,7 +181,7 @@ Animal a3 = new Cat();
 ```
 Burada üst sinif olan `Animal` hər obyektə görə müxtəlif davranış göstərir yəni çox yönümlü olur. 
 
-6) **C#-da hansı növ siniflər (class) mövcuddur?**
+## 6) C#-da hansı növ siniflər (class) mövcuddur? ##
 > C#-da aşağıdakı növdə siniflər (class) mövcuddur:
 * Abstract class
 * Static class
@@ -190,7 +190,7 @@ Burada üst sinif olan `Animal` hər obyektə görə müxtəlif davranış göst
 
 (Hər biri haqqında ətraflı məlumat verilib)
 
-7) **Abstract classlar və interfacelər arasındakı fərqlər nələrdir?**
+## 7) Abstract classlar və interfacelər arasındakı fərqlər nələrdir? ##
 
 Abstract class| Interface
 ------------- | -------------
@@ -202,7 +202,7 @@ Bir çox sinif eyni tipdən və ortaq davranış göstərirsə abstract sinif ba
 Abstract classlar metod,properti,fields,consts və s. elementlər ala bilir | Interfeyslər yalnız metodlarla işlənir
 Abstract classdan miras alan alt siniflər yalnızca bu sinifdəki abstract açar sözlü metodları implement etmelidir | Interfeysdən miras alan siniflər interfeysin bütün metodlarını implement etmelidir
 
-8) **Virtual metodlar nədir?**
+## 8) Virtual metodlar nədir? ##
 > Bir metodun ``virtual`` açar sözü ilə işarələnməsi o metodun alt siniflərdə dəyişdirilib fərqli davranış göstərə biləcəyi mənasına gəlir.
 
 ```
@@ -225,11 +225,11 @@ Abstract classdan miras alan alt siniflər yalnızca bu sinifdəki abstract aça
 > Yuxarıdakı nümunədə base classda olan `Start` metodu onun alt sinifində fərqli şəkildə davranış göstərdi, bunun üçün `override` açar sözündən istifadə etmək lazımdır.
 > Onu da unutmayaq ki, metodu `override` etmək kimi bir məcburiyyətimiz yoxdur,yəni `Start` metodunu `Audi` sinifində dəyişmək kimi bir məcburiyyətimiz yox idi.
 
-9) **Metodun override edilməsi nədir?**
+## 9) Metodun override edilməsi nədir? ##
 > Metodun override edilməsinə metodun əzilməsi də deyirlər, mənası da üst siniflərdə olan metodun alt siniflərdə dəyişdirilərək istifadə edilməsidir. 
 > Unutmayaq ki,yalnız `virtual` açar sözü ilə işarələnmiş metodları əzə (dəyişdirə) bilərik.
 
-10) **Metodun overload edilməsi nədir?**
+## 10) Metodun overload edilməsi nədir? ##
 > Bu sual metodun override edilməsi ilə qarışdırılmamalıdır. Override metodu əzmək idisə, overload metodun artıq yüklənməsidir.
 > Yəni bir sinifdə var olan bir metodu həmin sinifdə eyni ad altında yenidən yarada bilərik amma necə?
 > Bunun üçün bəzi şərtlər var təbii ki birəbir eyni imza ilə 2 eyni metodu yarada bilmərik.
@@ -286,7 +286,7 @@ class Math{
   }
 }
 ```
-11) **Static metodlar nədir?**
+## 11) Static metodlar nədir? ##
 > Static metodlar obyekt ilə deyil birbaşa sinifin adı ilə müraciət edilən metodlardır. Bu metodlar çağırılan zaman obyekt yaradılmadığından constructor işə düşməyəcək.
 > Static metodlar `static` açar sözü ilə yaradılır və yalnız static classlarda mövcud ola bilir.
 
@@ -302,7 +302,7 @@ public static class Math{
 Math.Sum(2,3);
 ```
 
-12) **Sealed classlar nədir?**
+## 12) Sealed classlar nədir? ##
 > `Sealed` açar sözü ilə tanımlanmış classlar miras alma xüsusiyyətini bloklayır. Yəni bu şəkildə tanımladığımız classlardan artıq miras ala bilmərik.
 
 ```
@@ -313,7 +313,7 @@ public sealed class Car{
 public class Audi:Car{ //error sealed classlardan miras almaq olmaz
 }
 ```
-13) **Access modifierlar nədir və hansılardır?**
+## 13) Access modifierlar nədir və hansılardır? ##
 > Access Modifier-lar kodda xarici müdaxilənin sərhədlərini müəyyən etmək üçün istifadə olunan əsas ifadələrdir. 
 > C#-da aşağıdakı access modiferlar mövcuddur:
 * Private — Bir dəyərin private olaraq tanımlanması , o dəyərin yalnız aid olduğu sinifdən əlçatılan olması mənasına gəlir.
@@ -322,7 +322,7 @@ public class Audi:Car{ //error sealed classlardan miras almaq olmaz
 * Internal — Bir dəyərin internal olaraq tanımlanması , o dəyərin yalnız eyni proyektdən əlçatılan olması deməkdir.
 * Protected Internal — Bir dəyərin protected internal olaraq tanımlanması , o dəyərin aid olduğu sinif , onun alt sinifləri və hətta onun digər proyektdəki alt sinifindən əlçatılan olması deməkdir.
 
-14) **Value type və referance type nədir və hansılardır?**
+## 14) Value type və referance type nədir və hansılardır? ##
 > C#-da tiplər yaddaşda tutduğu yerə görə 2 yerə bölünür _value tiplər_ və _referance tiplər_.
 > Value typelar yaddaşda stack adlanan hissədə tutulur. Value typelar aşağıdakılardır:
 * int                                    
@@ -372,20 +372,25 @@ Console.WriteLine(cities2[0]); // Naxçıvan
 ```
 > Bəs `cities` arrayının heapdakı referansına ({"Bakı","Masallı","Sumqayıt"}) nə olacaq ? Bu zaman Garbage Collector dediyimiz obyekt heapda adresi olmayan bütün referansları siləcək.
 
-15) **Garbage collector nədir?**
+## 15) Garbage collector nədir? ##
 > Obyekt yönümlü proqramlaşdırma dillərində mövcud olan Garbage Collectorun vəzifəsi heap bölməsində işini tamamlamış obyektlərin referanslarını təmizləməkdir.
 > Bir sinifdən obyekt yaratdığımız zaman heap bölməsində onun üçün yer ayırılır,bu obyektin işi bitdikdən sonra Garbage Collector avtomatik olaraq həmin obyektin referansını heapdan təmizləyir.
 
 > Garbage Collector yalnız heap bölməsində fəaliyyət göstərir!
 
-16) **Constructor metod nədir?**
+> Garbage collectoru bizim işə salmağımıza ehtiyac yoxdur,o avtomatik olaraq işə düşür amma özümüz Garbage colelctoru çağırmaq istəsək bu qayda ilə çağıra bilərik.
+```
+GC.Collect();
+```
+
+## 16) Constructor metod nədir? ##
 > Bir classdan obyekt yaradılarkən ilk işə düşən metodlardır. Constuctor public olmalı, class adı ilə eyni olmalıdır və constuctor metodların geri dönüş tipləri yoxdur.
 ```
 MyClass myObj = new MyClass();  
 ```
 > `new`-dən sonra `MyClass()` referansını çağırdıq və bildiyimiz kimi `()` mötərizə C# və Java kimi obyekt yönümlü dillərdə yalnız metodlarda istifadə olunur. Myclass-dan sonra gələn mötərizələr bəs hansı metodu aktivləşdirir? Məhz constructor metodları..
 > Beləliklə, constuctor metodlar `new` açar sözü ilə obyket yaradılarkən ilk işə düşən metodlardır. 
-> Obyekt yaradılarkən constructor metodlar mütləq işə düşür!
+> Obyekt yaradılarkən constructor metodlar mütləq işə düşür !
 ```
 class MyClass{
   public MyClass(){
@@ -394,7 +399,92 @@ class MyClass{
 }
 ```
 > Hər classda biz yazmasaq da, default olaraq boş bir constuctor mövcuddur.
+> Bir classda istənilən qədər constructor yaradıla bilər,parametr ala bilər və overload edilə bilər.
 > ***Constructor metod private olarsa, həmin sinifdən obyekt yaratmaq mümkün olmayacaq,çünki obyekt yaradılarkən mütləq constuctor metod işə düşməlidir,amma access modifiersi private olarsa , constructor metoda kənardan əlçatmaq mümkün olmayacağından ötrü obyekt yarada bilməyəcəyik.***
+
+## 17) Destructor metod nədir? ##
+> Constructor metodun əksidir,bir classdan yaradılan obyekt yaddaşdan təmizlənərkən yaddaşdan silinmədən son dəfə çalışan metoddur.
+
+> C# dilində destructor sadəcə classlarda mövcuddur və ***hər bir classın sadəcə 1 destructoru olur!***
+> Destructor metod parametr ala bilməz buna görə də overload da edilə bilməz!
+> Bir obyekt hansı şərtlərdə yox edilir (yaddaşdan silinir)?
+* Əgər obyekt hər hansı bir referans tərəfindən işarələnmirsə.. (həmin obyektin stackdakı adresi artıq o referansı göstərmirsə)
+* Obyektin yaradıldığı və istifadə edildiyi scope bitibsə.. (bu hal obyekt kənar bir scopeda istifadə edilməyibsə keçərlidir)
+* Obyket bir daha əlçatılan deyilsə..
+> Bu hallarda obyekt Garbage Collector tərəfindən yaddaşdan silinir,silinmədən öncə son bir dəfə destructor metod işə düşür.
+
+> Destructor metodun tanımlanması:
+```
+class MyClass{
+
+  ~MyClass(){
+    // obyekt imha edilərkən son dəfə çalışacaq kodlar  
+  }
+}
+```
+> C# classlarında biz yaratmadığımız təqdirdə default olaraq destructor mövcud olmur!
+
+## 18) C#-da Dispose və Finalize metodları arasındakı fərq nədir? ##
+> Hər iki metod yaddaşda istifadə edilməyən obyekti sərbəst buraxmaq üçün istifadə olunur. Yəni artıq istifadə olunmayan obyektləri silir.
+
+> Amma aralarında bəzi fərqlər mövcuddur:
+* Hər ikisi yaddaşdakı obyekti təmizləmək üçün istifadə edilir ancaq:
+  * Dispose metodu yaddaşdakı obyekti təmizləmək üçün _manuel_ olaraq istifadə edilir. 
+  * Finalize metodu isə yaddaşdakı obyekti təmizləmək üçün  _Garbage Collector_ tərəfindən istifadə edilir.
+* Dispose metodu manuel olaraq istifadə edildiyindən Garbage Collectora görə daha performanslı çalışır.
+* Digər tərəfdən Finalize metodu Garbage Colelctor tərəfindən çağırılırdığından performans baxımından yavaşdır.
+* Garbage collectorun nə zaman çalışacağı naməlumdur, bu da təhlükəsizlik baxımından risklidir.
+> Bu səbəblərdən C# -da Dispose metodunu istifadə etməyimiz tövsiyə edilir.
+
+
+## 19) C#-da using açar sözü nə üçün istifadə olunur? ##
+> C#-da using açar sözü 2 məqamda istifadə olunur.
+* Başqa bir namespace-də yazılmış class və metodları import etmək üçün:
+* Dispose metodunu manuel yazmaq yerine avtomatik olaraq çağırmaq üçün:
+> Birinci nümunədə `Models` folderi altında olan `Context` sinifini cari sinifində istifadə etmək istəyiriksə,həmin `Context` sinifini burada import edirik.
+```
+using Models;
+Context con = new Context();
+```
+> Ikinci nümunədə isə biz Dispose metodunun manuel olaraq çağırıldığını qeyd etmişdik..
+```
+MyClass myObj = new MyObj();
+((IDisposable)myObj).Dispose();
+```
+> Hər obyekt yaratdıqdan sonra Dispose metodunu bu cür manuel olaraq çağırmaq yerinə `using` açar sözündən istifadə edə bilərik
+```
+using (FileStream stream = File.OpenRead("e"))
+{
+  //kodlar
+}
+```
+> Daha qısa yazsaq..
+```
+using FileStream stream = File.OpenRead("e");
+```
+> `using` açar sözündən istifadə edərək manuel olaraq Dispose sinifini çağırmağa ehtiyac yoxdur
+
+> ***`using` açar sözü ancaq və ancaq `IDisposable` interfeysindən implement alan siniflərlə istifadə edilə bilir!***
+
+## 20) Namespace nədir? ##
+> C# -da namespacelar classların sərhədləridir/adresləridir əgər həmin classı başqa sərhəd daxilində istifadə etsək,adresini `using` açar sözü vasitəsilə bəyan etməliyik.
+```
+using Models.Entities;
+
+Product prod = new();
+```
+> Bu nümunədə /Models/Entities adresindəki/namespaceindəki sinifləri import etdik və artıq cari sinifdə istifadə edə bilərik.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
