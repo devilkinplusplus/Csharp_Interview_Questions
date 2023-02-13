@@ -575,6 +575,185 @@ public partial class Car
 > Fərqli partial classlarda eyni adlı metod yaxud dəyişən yarada bilmərik eynilə normal siniflərdə olduğu kimi. Unutmayaq partial classlar normal classlar kimi davranır,normal classlarda edilən hər əməliyyat burada da edilə bilər.
 
 
+## 26) Ref və out açar sözləri arasındakı fərq nədir? ##
+> Ref açar sözü referans sözünün qısaltmasıdır,parametrlərin referansını metoda vermək üçün istifadə edilir.Bir metoda parametr ötürdüyümüz zaman yalnız dəyəri kopyalanar, ötürdüyümüz parametrin referansını kopyalamaq üçün `ref` açar sözündən istifadə edə bilərik.
+
+> Əvvəlcə ref istifadə etmədən kodu aşağıdakı şəkildə yazaq:
+```
+int a = 41;
+Console.WriteLine(a); // 41
+
+ChangeNumber(a);
+Console.WriteLine(a); // 41
+
+void ChangeNumber(int num){
+    num = 100;
+}
+```
+> Metod vasitəsilə dəyişənin qiymətini dəyişdirmək istəsək bu zaman ref açar sözündən istifadə edə bilərik. Biz a dəyişəninə reference-nı(adressini) metoda ötür demiş oluruq.
+
+```
+int a = 41;
+Console.WriteLine(a); // 41
+
+ChangeNumber(ref a);
+
+Console.WriteLine(a); // 100
+
+void ChangeNumber(ref int num){
+    num = 100;
+}
+```
+
+> Out açar sözü də eyni işi görür, yəni parametrin referansını metodlara verməkdə istifadə olunur. `out` və `ref` -in təməl fərqi odur ki, ref açar sözünü istifadə ediriksə,parametrin başlanğıc dəyəri verilməlidir,out-da isə belə bir məcburiyyət yoxdur.
+```
+int a;
+
+ChangeNumber(out a);
+
+Console.WriteLine(a); // 100
+
+void ChangeNumber(out int num)
+{
+    num = 100;
+}
+```
+
+## 27) Const və readonly arasındakı fərq nədir? ##
+> Bütün proqram boyunca dəyərin sabit qalmasını istədiyimiz dəyişənləri tanımlayan zaman `const` və ya `readonly` açar sözlərindən istifadə edə bilərik. 
+> Hər ikisinin gördüyü iş eynidir,yəni sabit parametr yaratmağımıza kömək edir,amma aralarında bəzi fərqlər mövcuddur.
+
+* Const
+  * Tanımlandığı anda dəyəri verilməlidir
+  * Const ilə tanımlanan dəyişənlər statikdir və onlara sinifin adı ilə müraciət olunur
+  * Classdan yaradılmış obyekt vasitəsilə müraciət edilə bilməz
+
+* Readonly
+  * Dəyərini tanımladıqdan sonra metod yaxud constructorda verə bilərik
+  * Classdan yaradılan obyekt ilə müraciət edilə bilir
+  
+```
+public class Example
+{
+    public const float PI = 3.14f; // mütləq dəyəri verilməlidir
+    public readonly string variable; // dəyəri constructorda verildi
+
+    public Example(string variable)
+    {
+        this.variable = variable;
+    }
+    public Example(){}
+}
+```
+> Bu dəyişənlərə müraciət edən zaman :
+```
+Example.PI // const dəyər sinifin adı ilə çağırılır
+Example obj = new();
+obj.variable; // readonly dəyər obyekt ilə çağırılır
+```
+> Hər iki dəyişən də sabit olduğundan onların dəyərini dəyişə bilmərik!
+
+## 28) Birdən çox catch bloku çalışa bilərmi? ##
+> Try bloku ilə birlikdə birdən çox catch bloku tanımlana bilər ,amma _sadəcə exceptionu tutan ilk catch bloku çalışacaq_. Əgər proqram exception atarsa, bu exception sıra ilə catch bloklarında yoxlanılacaq və yalnız uyğun catch bloku işə düşəcək, əgər heç bir catch bloku uyğun deyilsə, heç biri işə düşməyəcək.  
+> Əgər uyğun bir exception üçün birdən çox catch bloku yazılarsa, bu zaman runtime error alacağıq.
+```
+try
+{
+    int a = 4;
+    Console.WriteLine(a / 0);
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+catch (DivideByZeroException ex) // error eyni exception üçün birdən çox catch bloku yazıla bilməz 
+{
+    Console.WriteLine(ex.Message);
+}
+
+```
+
+## 29) Jagged arraylar hansılardır? ##
+> Jagged arraylar içərisində hər biri müxtəlif ölçülü array ola bilən elementlər saxlayan arraylardır(massivlərdir).
+> Başqa bir sözlə jagged arraydakı hər array müxtəlif ölçüdə ola bilər.
+
+```
+int[][] jaggedArray = new int[3][];
+jaggedArray[0] = new int[5];
+jaggedArray[1] = new int[3];
+jaggedArray[2] = new int[2];
+```
+> Yuxarıdakı nümunədə tipi `int` olan jagged arrayın içərisində 3 array verilmiş və bu 3 arrayın hər biri müxtəlif ölçüdə qeyd edilmişdir.
+> Adətən matrikslərdə və hər sətirin fərqli sayda sütunları olan senaryolarda istifadə edilə bilər.
+
+## 30) Constructor zənciri nədir? ##
+> Constructor zənciri bir sinifin birdən çox constuctorundan birini çağıraraq bir constructordan digərinə keçmə əməliyyatıdır.
+
+> C# -da bir constructordan digərinə keçmək üçün `base()` yaxud `this()` açar sözlərindən istifadə edilə bilər.
+
+* `this()` açar sözü _bir class daxilindəki_ constructor metodlarda birindən digərinə parametr göndərmək üçün istifadə olunur
+```
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public Person(string lastName)
+    {
+       this.LastName = lastName;
+    }
+
+    public Person(string firstName, string lastName) :this(lastName) // lastName diger constructora göndərilib orada dəyər alacaq
+    {
+        this.FirstName = firstName;
+    }
+}
+```
+
+* `base()` açar sözü isə adından da anlaşıldığı kimi base classın (üst sinifin) constructoruna parametr göndərmək üçün istifadə olunur.
+ ```
+class Employee : Person
+{
+    public Employee(string firstName, string lastName) : base(firstName, lastName) // üst sinifə ötürülüb orada dəyər alacaq
+    {
+    }
+}
+ ```
+
+## 31) C# -da Genericlər nədir? ##
+> Genericlər classlarda,metodlarda və ya delegatelərdə bəlli bir tipə bağlı qalmadan kod yazmağı təmin edən xüsusiyyətlərdir.
+> Genericlər birdən çox data tipi ilə çalışan ortaq kodun yazılmasını təmin edir.Eyni kodun başqa tiplərlə (string,int..) işləməsini təmin edir.
+> Genericlərin istifadəsində classın yaxud metodun tipi bəlli deyil,runtime sırasında məlum edilir.
+```
+public class ExampleGeneric<T>
+{
+    public void GetValue(T entity)
+    {
+        Console.WriteLine(typeof(T));
+        Console.WriteLine(entity);
+    }
+}
+```
+> Yuxarıdakı kodda `T` bizim məhcul tipimizdir, çağırılan zaman T -nin yerinə məlum tipi istifadə ediləcək
+```
+ExampleGeneric<string> example = new(); // artıq tipimizin string olduğu məlumdur 
+example.GetValue("Hello");
+```
+> Çağırılan zaman tip məlum olur və artıq Generic classda `T` olan yerlər seçdiyim tiplə əvəz olunur,nümunədə `T` -lər `string` ilə əvəz olundu.
+> Aşağıdakı nümunədə isə generic metod istifadə edilmişdir
+```
+List<T> Calculate<T>(T[] entities)
+{
+    List<T> result = new();
+    foreach (var item in entities)
+    {
+        result.Add(item);
+    }
+    return result;
+}
+```
+
+## 32) ##
 
 
 
