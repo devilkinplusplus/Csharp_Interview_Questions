@@ -753,10 +753,132 @@ List<T> Calculate<T>(T[] entities)
 }
 ```
 
-## 32) ##
+## 32) C# -da is və as operatorları arasındakı fərq nədir? ##
+> Is və as operatorları C# dilində obyektin tipinin yoxlanılması üçün istifadə edilir.
+* Is operatoru bir obyektin hər hansı bir tipə aid olub olmadığını yoxlayır və geriyə true yaxud false qaytarır.
+```
+object obj = "Hello";
+bool result = obj is string;
+Console.WriteLine(result);  // true
+```
+* As operatoru isə bir obyektin hər hansı bir tipə çevirilib çevirilməyəcəyini yoxlayır.Əgər çevirilə bilirsə, obyektin həmin tipdəki dəyərini,çevirilə bilməzsə, `null` qaytarır.  
+```
+object obj = "Hello";
+string str = obj as string;
+Console.WriteLine(str);  // Hello
+```
 
+## 33) C# -da tuple nədir? ##
+> Tuple birdən çox tipdəki elementlərin bir-biriylə əlaqəli olaraq tutulduğu bir data tipidir.
+> Tuplelar bir dəyişən adı altında birdən çox datanı toplamaq üçün istifadə edilirlər və bu datalara müstəqil olaraq çatmaq mümkündür.
+```
+(int, string) tuple = (1, "Hello");
+```
+> Bu datalara dəyişən adından sonra nöqtə qoyub Item1 , Item2 .. şəklində çata bilərik.
+```
+(int, string) tuple = (1, "Hello");
+Console.WriteLine(tuple.Item1); // 1
+Console.WriteLine(tuple.Item2); // "Hello"
+```
+> Ayrıca çatdığımız dataları başqa bir dəyişənə ata bilərik
+```
+int firstElement = tuple.Item1;
+string secondElement = tuple.Item2;
+```
+> Tuplelar dataların bir-biriylə əlaqəli olaraq saxlanılmasını və dataların ayrı bir element olaraq çağırılmasını asanlaşdırırlar.
 
+## 34) Array və ArrayList arasındakı fərqlər nələrdir? ##
+> Array və ArrayList dataların toplanması üçün istifadə edilən tiplərdir.Hər ikisi birdən çox dataların toplanmasında istifadə edilsə də,fərqləri çoxdur.
 
+* Arraylar
+  * Əvvəlcədən müəyyən edilmiş tipdə,müəyyən edilmiş sayda məlumat toplayır
+  * Array yaratmaq üçün mütləq arrayın saxlayacağı datanın tipi və saxlanılacaq məlumatların sayı əvvəlcədən müəyyən edilməlidir
+  * Arraya data əlavə etmək yaxud çıxarmaq olmaz
+  * Null dəyərlər ala bilməz
+```
+int[] numbers = new int[3];
+numbers[0] = 1;
+numbers[1] = 2;
+numbers[2] = 3;
+```
+* ArrayList
+  * ArrayList üçün isə əvvəlcədən tip müəyyən edilmir və ArrayListlərin həcmi dinamikdir,yəni məlumat əlavə etdikcə yaxud sildikcə dəyişir
+  * ArrayListə məlumat əlavə etmək yaxud çıxarmaq mümkündür
+  * Null dəyərlər ala bilər
+```
+ArrayList numbers = new ArrayList();
+numbers.Add(1);
+numbers.Add(2);
+numbers.Add(3);
+```
+> ArrayListin performansı Arraya görə daha yavaşdır,həmçinin ArrayList məlumatları object tipində qəbul etdiyindən müxtəlif tipdən məlumatları saxlaya bilər.
+> Digər tərəfdən arraylar seçilən tipdə məlumatları toplayır,hansının istifadə ediləcəyi ehtiyaca görə dəyişir.
+
+## 35) Break və continue açar sözləri arasındakı fərqlər nələrdir? ##
+> Break və continue açar sözləri dövrlərdə (for,while) istifadə edilirlər.
+
+* Break açar sözü dövrü sonlandırır və dövrdən tamamilə çıxır.
+```
+for (int i = 0; i < 10; i++)
+{
+    if (i == 3)
+        break; // 3-cü iterasiyada dövr tamamilə sonlanır
+    Console.WriteLine(i); // 0 1 2
+}
+```
+* Continue açar sözü isə dövrün cari iterasiyasını atlayır və növbəti iterasiyaya keçir.
+```
+for (int i = 0; i < 10; i++)
+{
+    if (i == 3)
+        continue; // 3-cü iterasiya keçilir dövr davam edilir
+    Console.WriteLine(i); // 0 1 2 4 5 6 7 8 9
+}
+```
+
+## 36) C# -da error handling (xeta idarəsi) üçün istifadə edilən açar sözlər hansılardır? ##
+> Aşağıdakı açar sözlər C# -da error handling zamanı istifadə edilə bilər
+* `try` xəta ehtimalı olan kod bu blokda yazılır
+* `catch` try blokunda xəta baş verərsə burada yazdığımız kodlar çalışacaq
+* `finally` xəta olub olmamasından asılı olmayaraq çalışacaq kod blokudur
+* `throw` xəta yaratmaq üçün istifadə edilir (əsasən catch blokunda)
+> Xəta baş verməsi anında xətanın idarə edilməsində istifadə edəcəyimiz açar sözlər bunlardır, nümunəyə baxaq:
+```
+try
+{
+  int a = 2;
+  int b = 0;
+  int c = a / b;
+  Console.WriteLine(c);
+}
+catch (Exception ex)
+{
+  throw new Exception(ex.Message);
+}
+finally
+{
+   Console.WriteLine("BB");
+}
+```
+## 37) C# -da komment əlavə etmənin yolları hansılardır? ##
+* Single-Line Comment: Tək sətirlik komment üçün `//` simvolu istifadə edilir
+```
+// This is a single-line comment
+```
+* Multi-Line Comment: Çox sətirlik komment üçün `/* */` istifadə edilir
+```
+/*
+This is
+multi-line 
+comment
+*/
+```
+* XML Documentation Comments: Xml kodlarındakı commentlər üçün istifadə olunur
+```
+/// <summary>
+/// This is an XML documentation comment
+/// </summary>
+```
 
 
 
