@@ -1119,10 +1119,23 @@ foreach (int result in results)
 
 ```
 
-## 46) C# -da anonim tipler nədir? ##
+## 46) C# -da anonim tipler (anonymous type) nədir? ##
+> C# -da anonim tip (anonymous type) kodda açıq adı olmayan runtime zamanı tanımlanan bir tipdir. Xüsusi bir sinif yaratmadan sanki elə bir sinif varmış kimi, dəyər ötürə bildiyimiz bir tipdir.
+```
+ var Person = new { Name = "Ilkin", LastName = "Rufullayev" }; // new açar sözü ilə bu cür tanımlanır, içərisində istədiyimiz adda propertilər yaza bilerik
+ Console.WriteLine(Person.Name); // Ilkin
+```
+> Anonim tiplər sayəsində xüsusi bir hal üçün hər dəfə bir class yaratmalı deyilik. Əgər anonim tip istifadə etməsək üstdəki kod bu cür olacaqdı.
+```
+class Person{
+  public string Name {get;set;}
+  public string LastName {get;set;}
+}
 
-
-
+var value = new Person(){ Name = "Ilkin", LastName = "Rufullayev"};
+Console.WriteLine(value.Name);
+```
+> Əsasən Linq sorğularını sadələşdirmək və bunun üçün ayrıca sinif yaratmadan əməliyyatları icra etməkdə istifadə edilir.
 
 
 
