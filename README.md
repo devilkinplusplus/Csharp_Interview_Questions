@@ -1217,15 +1217,25 @@ Console.WriteLine(value.Name);
 * Ümumiyyətlə, JSON XML-dən üstün tutulur
 * RSS səhifələri, Sitemap faylları və bəzi API proqramları XML-in üstünlüklə istifadə edildiyi sahələrdir
 
+## 49) Lazy Loading və Eager Loading nədir? ##
+> Entity framework-ün yazılan Linq sorğularına bağlı olaraq məlumatı database-dən gətirmək üçün loading tipləri vardır. Bunlar Lazy Loading və Eager Loading adlanır.
 
+***Lazy Loading***
+> Səhifədə yer alan bir obyektin ehtiyac duyulmadığı təqdirdə çağırılmaması prinsipi ilə çalışır. Yəni bir obyekt nümunəsinin ehtiyac duyulana qədər alınmaması və gözlədilməsi məqsədi daşıyır. Bu məqsədlə datalar sorğuya bağlı olaraq gətirilir və bütün dataların gətirilməsi yerinə ehtiyac duyulduqca təkrar-təkrar database-ə sorğu göndərilir.
 
+***Eager Loading***
+> Lazy loadingin tam əksi istiqamətdə çalışır. İstifadə edəcəyimiz obyektləri, ehtiyac anından da əvvəl yaradır və gözlədir. Eager loading Linq sorğusu işə düşəndə bütün dataları yükləyib yaddaşda saxlayır.(default loading tipidir)
 
+> İki üsulun da üstünlükləri və mənfi cəhətləri var. Bunlar yazdığımız proyektin ehtiyaclarına görə, database-in böyüklüyünə görə və database-dəki əlaqələrin çoxluğuna görə dəyişir.
+> Lazy loading ilə entitylər ehtiyac olduqca gətirilir.Eager loadingə görə database-ə daha çox bağlanır və istək göndərir burada da proqram üçün əlavə yüklənmə vardır. Eager loading isə tək sorğuda məlumatları alır.
+> Lazy loading və Eager loading arasındakı işləmə sürəti database-dəki dataların sayından asılıdır. Dataların sayı artdıqca Lazy loading database-ə təkrar-təkrar bağlandığı üçün sürəti azalır.
 
-
-
-
-
-
+Performans  | Lazy Loading | Eager Loading
+------------- | ------------- |--------------
+100 data üçün orta hesabla sürət  | 1sn | 1sn
+1000 data üçün orta hesabla sürət  | 2.5sn  | 2sn
+5000 data üçün orta hesabla sürət  | 7.5sn  | 7sn
+10000 data üçün orta hesabla sürət | 9.5sn  | 6.3sn
 
 
 
