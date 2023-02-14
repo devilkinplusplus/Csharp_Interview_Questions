@@ -1137,16 +1137,36 @@ Console.WriteLine(value.Name);
 ```
 > Əsasən Linq sorğularını sadələşdirmək və bunun üçün ayrıca sinif yaratmadan əməliyyatları icra etməkdə istifadə edilir.
 
+## 47) Solid prinsipləri hansılardır? ##
+> Bu prinsiplər yazdığımız kodun anlaşıqlı , yeniliklərə açıq , minimum dərəcədə təkrarlı olmasını təmin edən prinsiplər toplusudur.
 
+* Bu prinsiplərin məqsədi
+  * Yazdığımız kodun gələcəkdə yeni tələblərə tez adaptasiya olması
+  * Kodda ciddi bir dəyişiklik etmədən yeni xüsusiyyətlərin əlavə edilə bilməsi
+  * Kod təkrarçılığının qarşısının alına bilməsi
 
+* Solid prinsipləri aşağıdakılardır:
+  * Single Responsibility Principle (SRP)- Tək məsuliyyət prinsipi
+  * Open closed Principle (OCP)- Açıq qapalı prinsip
+  * Liskov substitution Principle (LSP)- Liskovun əvəzetmə prinsipi
+  * Interface segregation principle(ISP)- İnterfeys ayrılma prinsipi
+  * Dependency inversion principle(DIP)- Asılılğın tərsinə çevrilmə prinsipi
 
+***Single Responsibility Principle — (Tək məsuliyyət prinsipi)***
+> Bu prinsipin məqsədi bir sinifin ya da metodun bir işi görməsidir.
+> Bir sinifdə ancaq bir məqsəd üçün kodlar yazıla bilər,məsələn CRUD əməliyyatlarını yazdığımız bir sinif olsun, bu sinifimizin məqsədi yalnız CRUD əməliyyatlarını icra etməsidir.Bu sinifdə biz başqa məqsədlər üçün, məsələn eyni zamanda modelə qoşulmaq üçün metod yazsaq, o zaman “Single responsibility”-nin prinsipini pozmuş olarıq
 
+***Open Closed Prinsiple — (Açıq qapalı prinsipi)***
+> Bu prinsipin məqsədi sinifin dəyişikliklərə bağlı ,amma yeniliklərə açıq olmasıdır. Yəni proyektimiz yeniliklərə açıq olmalıdır, amma eyni zamanda təməl sinifimiz dəyişdirilməməlidir.
 
+***Liskov substitution Principle — (Liskovun əvəzetmə prinsipi)***
+> Bütün classlarda eyni olacaq əsas metodların base classa yazılıb, vəziyyətə görə dəyişəcək metodların isə interfacelərə yazılaraq ehtiyac duyulduqda çağırılmasıdır. Lazımsız implementlərin qarşısını almaq üçün istifadə olunur.
 
+***Interface segregation principle — (İnterfeys ayrılma prinsipi)***
+> Bir interfeysə yalnız bir işi görən metodların yığılaraq qarışıqlığın qarşısını alınmasıdır. Tək məsuliyyət prinsipinə bənzəyən bu prinsipdə bir işi görən metodlar bir interfeysə yazılır, beləcə implement zamanı lazımsız metodlar çağırılmamış olur.
 
-
-
-
+***Dependency inversion principle — (Asılılğın tərsinə çevrilmə prinsipi)***
+> Bu prinsipə görə üst səviyyə siniflər , metodlar və modullar alt səviyyəli siniflərdən asılı olmamalıdır.Alt siniflərdə edilən hər hansı bir dəyişiklik üst siniflərə təsir etməməlidir.
 
 
 
