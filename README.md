@@ -1168,8 +1168,54 @@ Console.WriteLine(value.Name);
 ***Dependency inversion principle — (Asılılğın tərsinə çevrilmə prinsipi)***
 > Bu prinsipə görə üst səviyyə siniflər , metodlar və modullar alt səviyyəli siniflərdən asılı olmamalıdır.Alt siniflərdə edilən hər hansı bir dəyişiklik üst siniflərə təsir etməməlidir.
 
+## 48) Json və Xml arasındakı fərqlər nələrdir? ##
+> Fərqli kompüter sistemləri və məlumat bazaları müxtəlif məlumat formatlarına malikdir. Bu məlumatlar bir-biri ilə uyğunsuz ola bilər. JSON və XML internetdəki müxtəlif sistemlər arasında məlumat mübadiləsi üçün iki ümumi formatdır.
 
+> Json (Javascript Object Notation) JSON strukturlaşdırılmış məlumatları saxlayan bir formatdır və ümumiyyətlə server və müştəri arasında məlumat mübadiləsi üçün istifadə olunur.
+> JSON-un bəzi məlumat növləri Number, Boolean, String, Array, Obyekt, Nulldur. JSON sintaksisi açar və dəyər (Key - Value) cütlərindən ibarətdir və məlumatlar vergüllə ayrılır. Aşağıdakı bir JSON nümunəsidir.
+```
+{
+  "Id": "S001",
+  "Ad": "Ann"
+}
+```
+**Json istifadə etmənin üstünlükləri**
+* Bütün brauzerlər tərəfindən dəstəklənir
+* Oxumaq və yazmaq asandır
+* Şəbəkə bağlantısından istifadə edərək strukturlaşdırılmış məlumatları ötürməyə imkan verir
+* Müasir proqramlaşdırma dilləri ilə istifadə edilə bilər
 
+> XML (Extensible Markup Language) html-ə çox bənzəyən etiketli bir sintaksisə sahibdir, amma html-i əvəz etmir və onun kimi veb səhifənin quruluşu üçün deyil.XML daha ümumi məqsədlidir. XML-in vacib üstünlüyü proqramçıların özlərinə etiketlər yarada bilməsidir.
+> XML-in əsas üstünlüyü isə ondan ibarətdir ki, iki fərqli sistem arasında körpü kimi istifadə edilə bilər. Məsələn, bir bankda daha köhnə bir kompüter sistemi ola bilər. XML onu yeni bir sistemlə bağlamaq və məlumat mübadiləsi üçün istifadə edilə bilər. Bu iki sistem tamamilə fərqli olsa da, məlumat mübadiləsi mümkündür.
+> XML böyük məlumat toplusu üçün uyğun deyil. Bu vəziyyətdə bir verilənlər bazası istifadə edilməlidir. Məlumat mürəkkəbləşdikdə XML oxumaq çətin ola bilər.
+> Aşağıdakı bir Xml nümunəsidir
+```
+<food>     
+  <name>Belgian Waffles</name>     
+  <price>$5.95</price>     
+  <description>
+  Two of our famous Belgian Waffles with plenty of real maple syrup 
+  </description>     
+  <calories>650</calories> 
+</food>
+```
+***Xml istifadə etmənin üstünlükləri***
+* XML-in köməyi ilə müxtəlif platformalar arasında sürətli məlumat mübadiləsi apara bilərik
+* XML platformanın dəyişdirilməsi prosesini asanlaşdırır
+
+***Xml və Json arasındakı oxşarlıqlar***
+* JSON və XML ikisi də veb əlaqəli texnologiyalardır
+* Hər ikisi məlumatları təsvir etmək üçün istifadə edilə bilir
+* Hər ikisi məlumat mübadiləsi üçün istifadə edilə bilir
+* Hər ikisi platforma dəyişikliklərini dəstəkləyir
+* Hər ikisi də bir çox proqramlaşdırma dilləri tərəfindən istifadə olunur
+
+***Xml və Json arasındakı fərqlər***
+* JSON XML-dən daha sürətli və kiçik həcmlidir
+* JSON XML-dən daha sadə və oxunması asandır, Xml isə daha geniş və mürəkkəbdir
+* JSON Javascript-dən yarandığı halda, XML işarələmə dillərindən yaranmışdır
+* Ümumiyyətlə, JSON XML-dən üstün tutulur
+* RSS səhifələri, Sitemap faylları və bəzi API proqramları XML-in üstünlüklə istifadə edildiyi sahələrdir
 
 
 
