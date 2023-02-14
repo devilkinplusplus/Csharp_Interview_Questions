@@ -1119,6 +1119,29 @@ foreach (int result in results)
 
 ```
 
+## 46) C# -da anonim tipler nədir? ##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
