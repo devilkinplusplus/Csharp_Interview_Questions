@@ -1237,6 +1237,24 @@ Performans  | Lazy Loading | Eager Loading
 5000 data üçün orta hesabla sürət  | 7.5sn  | 7sn
 10000 data üçün orta hesabla sürət | 9.5sn  | 6.3sn
 
+## 50) Dependency inversion və dependency injection arasındakı fərq nədir? ##
+> Dependency inversion Solid prinsiplerinin sonuncusudur, üst səviyyəli modulların alt səviyyəli modullardan asılı olmamasını deyir. (necə ki,rəhbər işçidən yox işçi rəhbərdən asılıdır)
+
+> Dependency inversion sadəcə bir prinsipdir, bu prinsipi isə dependency injection vasitəsi ilə həyata keçirəcəyik.
+
+**Dependency injection - Asılılıq yaradan hissələrin ayrılması və kənardan verilməsi ilə sistemdəki asılılığın minimuma endirilməsi prosesidir.**
+* Bu 3 yolla edilə bilər
+  * Constructor Injection
+  * Property Injection
+  * Method Injection
+
+***Dependency injection bir sinifin içərisində başqa sinifə aid obyekti istifadə edən zaman bu sinifi new açar sözü ilə yaratmamağımızı deyir***
+
+> Bu mövzu çox mürəkkəb olduğundan burada qeyd etmek yerine bu mövzunun çox gözəl izah edildiyi bir menbeni paylaşmaq istəyirəm, aşağıdakı linkdən keçid edərək Dependency injection haqqında daha ətraflı məlumat sahibi ola bilersiniz.
+> https://www.youtube.com/watch?v=Bhj2XdcoT2Q
+
+
+
 
 
 
