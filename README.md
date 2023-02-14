@@ -1063,6 +1063,71 @@ foreach (var item in nums.Where(x => x > 5))
 ```
 > Bu nümunədə collectionda gələn məlumatların 5-dən böyük olanlarını ekrana yazdırdıq.
 
+## 45) C# -da delegate nədir? ##
+> Delegatelər bir ya da daha çox metodu yaddaşda saxlayan referans tipli obyektlərdir. Delegate sözü bizim dilə təmsilçi olaraq çevirilə bilər yəni bir neçə metodu təmsil etdiyi adından məlumdur.
+
+> Delegatelər metodun imzası şəklində tanımlanır, tanımlanarkən `delegate` açar sözündən istifadə edilir. Və həmin delegate-ə yazdığımız metodları `+=` operatoru ilə əlavə edə bilirik.
+```
+public delegate int OperationHandler(int x,int y); // Delegatelərin sonuna Handler əlavə etmək adətdəndir)
+```
+> Indi bu delegate-ə əlavə etmək üçün metodlar yazaq.
+```
+public delegate int OperationHandler(int x, int y);
+public class Operations
+{
+    public int Sum(int x, int y) => x + y;
+    public int Substract(int num, int num2) => num - num2;
+    public int Multiply(int a, int b) => a * b;
+    public int DividedBy(int x, int y) => x / y;
+}
+```
+> Çağırılan zaman bu cür çağırılacaq
+```
+Operations obj = new();
+OperationHandler operation = obj.Sum;
+operation(4,2); // 6
+
+// delegate-ə digər metodları da əlavə edək
+operation += obj.Substract;
+operation += obj.Multiply;
+operation += obj.DividedBy;
+
+operation(4,2); // 2 netice en son elave edilen metodun cavabını yazdıracaq
+```
+> Delegate-ə metod əlavə etmək üçün `+=`, metod çıxarmaq üçün `-=`
+
+> Bütün metodların neticesini görmek üçün aşağıdakı kimi bir kod yaza bilerik
+```
+Operations obj = new Operations();
+OperationHandler handler = obj.Sum;
+handler += obj.Substract;
+handler += obj.Multiply;
+handler += obj.DividedBy;
+
+List<int> results = new List<int>();
+Delegate[] delegates = handler.GetInvocationList();
+
+foreach (Delegate del in delegates)
+{
+    results.Add((int)del.DynamicInvoke(5, 2));
+}
+
+foreach (int result in results)
+{
+    Console.Write(result + " "); // 7 3 10 2
+}
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
