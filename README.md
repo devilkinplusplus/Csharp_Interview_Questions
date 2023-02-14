@@ -831,7 +831,7 @@ for (int i = 0; i < 10; i++)
 for (int i = 0; i < 10; i++)
 {
     if (i == 3)
-        continue; // 3-cü iterasiya keçilir dövr davam edilir
+        continue; // 3-cü iterasiya keçilir və dövr davam edilir
     Console.WriteLine(i); // 0 1 2 4 5 6 7 8 9
 }
 ```
@@ -873,18 +873,195 @@ multi-line
 comment
 */
 ```
-* XML Documentation Comments: Xml kodlarındakı commentlər üçün istifadə olunur
+* XML Documentation Comments: Xml kodlarındakı commentlər üçün `///` istifadə olunur
 ```
 /// <summary>
 /// This is an XML documentation comment
 /// </summary>
 ```
 
+## 38) C# -da nullable tiplər necə istifadə edilir? ##
+> Bildiyimi kimi C# -da value typelar `null` dəyərlər ala bilmir, nullable tiplər value typelara null dəyərlər ötürə bilməyimizi təmin edir və aşağıdakı kimi yazılır.
 
+```
+int a = null; // error value type null ola bilmez
+Nullable<int> b = null; // okay
+```
+> Bu yazılışı daha da qısaldıb aşağıdakı kimi yaza bilerik
+```
+int? b = null;
+```
+> Bu nullable dəyişənlərinin dəyərinin olub olmadığını yoxlamaq üçün `HasValue` propertisindən istifadə edə bilərik
+```
+if(b.HasValue) // b null deyilsə true əks halda false
+    // codes
+```
+> Dəyərini almaq üçün isə `Value` propertisindən istifadə ediə bilərik
+```
+if(b.HasValue)
+    Console.WriteLine(b.Value);
+```
+> Bunlarla yanaşı onu da bilməkdə fayda var ki, `var` tipi heç vaxt null ola bilməz!
 
+## 39) C# -da String və StringBuilder arasındakı fərq nədir? ##
+* String mətn, text şəklində dəyərlər saxlamaq üçün istifadə etdiyimiz bir tipdir. Mətn tipli dəyərlərin içərisində axtarış, qarşılaşdırma və s. əməliyyatlar icrə edə bilərik.
+* Amma `String` sinifi immutable (dəyişdirilə bilməz) olduğundan cari string tipli dəyişənimizdə etdiyimiz dəyişikliklər üçün yeni bir `String` obyekti yaradılır, dəyişikliklərimiz orada qeyd edilir və əvvəlki stringin referansı qırılır.
+```
+// String sinifi
+string myString = "Salam, Dünya!";
+myString = myString.Replace("Dünya", "C#"); // heapda yeni bir obyekt yaradıldı
+Console.WriteLine(myString);
+```
+* `StringBuilder` sinifi də mətn tipli dəyərləri saxlamaq üçün istifadə edilir.
+* Təməl fərq odur ki, `StringBuilder` sinifi, `String` kimi immutable deyil, yəni cari dəyərin üzərində dəyişikliklər etdiyimiz zaman yeni bir obyekt yaradılmır.
+```
+// StringBuilder sinifi
+StringBuilder myStringBuilder = new StringBuilder("Salam, Dünya!");
+myStringBuilder.Replace("Dünya", "C#"); 
+Console.WriteLine(myStringBuilder.ToString());
+```
+* Bonus olaraq, `StringBuffer` sinifi haqqında da məlumat verək, demək olar ki, `StringBuilder` ilə eynidir.
+* `StringBuffer`-in təməl fərqi sinxron şəklində çalışması və 2 threadın eyni vaxtda eyni metoda daxil olmasına icazə verməməsidir. 
 
+## 40) Array.CopyTo() və Array.Clone() metodları arasındakı fərq nədir? ##
+> Hər iki metod С# -da arrayları kopyalamaq üçün istifadə edilir
+* `Array.CopyTo()` metodu əsas arraydakı elementləri seçdiyimiz arraya kopyalamaqda istifadə olunur
+* Bu metodla seçdiyimiz arrayın tipini və həcmini ötürməliyik, əgər əsas arrayın həcmi seçdiyimiz arrayın həcmindən böyük olsa, ArgumentException xətasını alacağıq.
+```
+int[] currentArray = new int[] { 1, 2, 3 };
+int[] selectedArray = new int[3]; // həcmi və tipi əsas arraydakılarla eyni olmalıdır
 
+// System.Array.CopyTo() 
+currentArray.CopyTo(selectedArray, 0);
+Console.WriteLine(string.Join(", ", selectedArray)); // 1, 2, 3
+```
+> Əks halda
+```
+int[] currentArray = new int[] { 1, 2, 3 };
+int[] selectedArray = new int[2]; // həcmi cari arraydakından aşağıdır
 
+// System.Array.CopyTo() 
+currentArray.CopyTo(selectedArray, 0); // ArgumentException
+Console.WriteLine(string.Join(", ", selectedArray)); 
+```
+* `Array.Clone()` metodu isə əsas arrayın bir kopyasın yaradır və geriyə kopyasını yaratdığı arrayı dönür.
+* Bu metod əsas arrayın bir kopyasını yaratdığından əsas arrayda ediləcək dəyişikliklərə məruz qalmayacaq.
+```
+int[] currentArray = new int[] { 1, 2, 3 };
+int[] selectedArray = (int[])currentArray.Clone(); // həcmini ötürməyimizə ehtiyac yoxdur
+
+Console.WriteLine(string.Join(", ", selectedArray)); // 1, 2, 3
+```
+
+## 41) C# -da extension metodlar nədir? ##
+> Extension metodlar class ya da structu dəyişdirmədən onlara metod əlavə edə bilməyimizi təmin edir.
+> Bəzi classlar əlçatılmaz ola bilər, həmin classların içərisinə müdaxilə etmədən onlara aid metodlar yaza bilərik.
+* Extension metod yazmaq üçün bir neçə qayda var
+  * Extension metodlar static classda static metod olaraq yazılmalıdır
+  * Genişləndiriləcək class həmin extension metoda metodun ilk parametri olaraq verilib önünə this açar sözü ilə yazılmalıdır.
+  * Extension metodda müəyyən edilmiş parametrlərdən yalnız 1-i this açar sözlə müəyyən edilə bilər.
+> Bir extension metod nümunəsi yazaq, fərz edək ki, belə bir classımız var və biz o classa müdaxilə etmədən ona aid metod yazmaq istəyirik
+```
+class Math{
+    public int Sum(int num1,int num2){
+      return num1 + num2;
+    }
+}
+```
+> Indi extension metodu yazaq
+```
+public static class MathExtension{ // istediyimiz adı vere bilerik
+    public static int Multiply(this Math math,int num1,int num2){ // ilk parametr genişledilecek class və önüne this açar sözü
+      return num1 * num2;
+    }
+}
+```
+> Artıq classdan obyekt yaradılan zaman hər iki metoda çata bilərik
+```
+Math math = new Math();
+math.Sum(3,4);
+math.Multiply(4,2);
+```
+***Extension metodlar statik olaraq yazılmağına baxmayaraq obyekt adı ilə çağırılır***
+> Extension metodlar daha çox C# -ın hazır metodlarına əlavə metod yazmaq istədiyimiz zaman source koda müdaxilə etmədən bunu etməyimizə imkan verir.
+
+## 42) Async və await açar sözləri nə üçün istifadə edilir? ##
+> Bu açar sözlər yazdığımız kodların asinxron şəkildə çalışması üçün istifadə edilir.
+> Asinxron proqramlaşdırmanı anlamaq üçün əvvəlcə sinxron proqramlaşdırmaya baxaq, sinxron proqramlaşdırmada yazdığımız kodlar yuxarıdan aşağıya doğru compile edilir və ona görə nəticə dönür. Yəni bir əməliyyat bitdikdən sonra digərinə keçilir.
+
+> Asinxron proqramlaşdırmada isə əməliyyatlar eyni anda başlayır.
+
+![sync](https://user-images.githubusercontent.com/96441243/218666761-8453bd32-dda7-4826-bfe0-c52539b48db4.png)
+
+> Bir metodu asinxron şəkildə yazmaq üçün `async` və `await` açar sözlərindən istifadə etməliyik.
+```
+public async Task<IEnumerable<Student>> GetAll(){
+    return await _context.Students.ToListAsync();
+}
+```
+> Yuxarıdakı metodda databasadan məlumatlar gətiriləcək, amma məlumatların sayına görə bu əməliyyat bir neçə saniyə çəkə bilər asinxron proqramlaşdırma həmin bir neçə saniyə ərzində digər kodların çalışmasına, bir neçə saniyə bitib məlumatlar gələndə isə yenidən buranın çalışmasına imkan verir.
+
+> `await` açar sözü gözləniləcək yeri müəyyən edir, yəni koda 'Siz davam edin, datalar gelende men xeber edecem' deyir.
+> `await` açar sözünü istifadə etmək üçün metodun imza hissəsində `async` açar sözünü istifadə edib geri dönüş tipini isə `Task<>` arasında yazmalıyıq
+
+> Bəs nə zaman kodları asinxron yazaq?
+* Əgər metodun uzaq bağlantısı varsa, (Database,Cloud ..)
+* Yaxud Http request göndərirsə, bu zaman metodu asinxron yazmağımız daha yaxşı olar.
+
+***Onu da bilmək də fayda var ki, asinxron proqramlaşdırma performansı artırmır, sadəcə saniyədə cavablandırılacaq request sayını artırır.***
+
+## 43) C# -da Indexer nədir? ##
+> Indexer bir classa array kimi indeks ötürməyimizi təmin edir və sinifin içərisindəki elementlərə çatmaq üçün array istifadə edilir.
+
+> Indexer bildiyimiz propertiyə çox bənzəyir eynən onun kimi get və set bloklarına sahibdir. Classdakı array yaxud listlərin elementlərini get və set blokları ilə istifadə etməyimizə yarayır.
+```
+class Indexer
+{
+    int[] numbers = new int[5];
+    public int this[int index]
+    {
+        get
+        {
+            return numbers[index];
+        }
+        set
+        {
+            numbers[index] = value;
+        }
+    }
+}
+```
+> Indexer propertiyə çox bənzəyir tək fərq `this[]` sözüdür həmçinin indexerlara ad verilmir.
+
+> Çağırılarkən bu cür istifadə olunur
+```
+Indexer example = new Indexer();
+example[0] = 3; // bu zaman Indexerin set blokları çalışır
+example[3] = 4;
+Console.WriteLine(example[0]); // indexerin get blokları burada işə düşür
+```
+> `example[0] = 3;` dediyimiz zaman bu deyer indexerə gedir orada set bloklarına düşür və `numbers[0] = 3;` şəklində arraya ötürülür.
+> `Console.WriteLine(example[0]);` bu zaman isə indexerin get blokları çalışır və `return numbers[0];` şəklində nəticə qayıdır.
+
+## 44) C# -da Linq nədir? ##
+> LINQ (Language Integrated Query), C# ve diger .NET dillərində dataları sorğulamak üçün istifadə edilən bir xüsusiyyətdir.
+
+> Linq databasedən, collectionlardan, xml fayllarından gələn dataları sorğulamağımızı asanlaşdırır.
+
+![linq](https://user-images.githubusercontent.com/96441243/218675368-b46ce3c8-aead-4b24-950e-2d97475dbf34.png)
+
+> Linq sorğuları vasitəsilə gələn məlumatları filterdən keçirib, qruplayıb istifadə edə bilərik.
+> Linq sorğuları sorğunun gerçəkləşdirildiyi yerə uyğun olaraq fərqli sintakslarda istifadə edə bilər, məsələn Sql-dən gələn datalar üçün sql-ə bənzər sintaksis istifadə edə bilirkən,xml-dən gələn datalar üçün ona uyğun bir sintaksisdə yazıla bilir. 
+
+```
+List<int> nums = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+foreach (var item in nums.Where(x => x > 5))
+{
+    Console.WriteLine(item);
+}
+```
+> Bu nümunədə collectionda gələn məlumatların 5-dən böyük olanlarını ekrana yazdırdıq.
 
 
 
