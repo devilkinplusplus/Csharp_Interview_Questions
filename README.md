@@ -378,7 +378,7 @@ Console.WriteLine(cities2[0]); // Naxçıvan
 
 > Garbage Collector yalnız heap bölməsində fəaliyyət göstərir!
 
-> Garbage collectoru bizim işə salmağımıza ehtiyac yoxdur,o avtomatik olaraq işə düşür amma özümüz Garbage colelctoru çağırmaq istəsək bu qayda ilə çağıra bilərik.
+> Garbage collectoru bizim işə salmağımıza ehtiyac yoxdur,o avtomatik olaraq işə düşür amma özümüz Garbage collectoru çağırmaq istəsək bu qayda ilə çağıra bilərik.
 ```
 GC.Collect();
 ```
