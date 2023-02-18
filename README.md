@@ -1253,12 +1253,28 @@ Performans  | Lazy Loading | Eager Loading
 > Bu mövzu çox mürəkkəb olduğundan burada qeyd etmek yerine bu mövzunun çox gözəl izah edildiyi bir menbeni paylaşmaq istəyirəm, aşağıdakı linkdən keçid edərək Dependency injection haqqında daha ətraflı məlumat sahibi ola bilersiniz.
 > https://www.youtube.com/watch?v=Bhj2XdcoT2Q
 
+## 51) C#-da "==" və "Equals()" arasındakı fərq nədir?  ##
+> Həm qarşılaşdırma operatoru olan "==" ,həm də `Equals()` metodu 2 fərqli dəyəri müqayisə etmək üçün istifadə edilir.
+> 2 value tipi müqayisə edərkən heç bir fərq gözə dəymir, əsas fərq referans typeların müqayisəsində ortaya çıxır.
+> Referans tiplərini (reference type) qarşılaşdırarkən `==` operatoru 2 obyektin referansını müqayisə edərkən, `Equals()` metodu isə obyektlərin dəyərlərini müqayisə edir.
 
+***Nümunədə referans tiplərin həm adresləri, həm də dəyərləri bərabər olduğundan hər ikisi `true` dönəcək.***
+```
+string message = "some string value";
+string operationMessage = message; //referanslar beraberleşdirildi
 
+Console.WriteLine(message == operationMessage); //true
+Console.WriteLine(message.Equals(operationMessage)); //true
+```
+***Digər bir nümunədə isə dəyərləri eyni olmasına baxmayaraq tiplərin referansları fərqlidir, bu zaman nəticə aşağıdakı kimi olacaq***
+```
+object motorbike = "kawasaki";
+char[] values = { 'k', 'a', 'w', 'a', 's', 'a', 'k', 'i' };
+object myBike = new string(values); //kawasaki
 
-
-
-
+Console.WriteLine(myBike == motorbike); //false çünki referanslar ferqlidir
+Console.WriteLine(myBike.Equals(motorbike)); //true esas deyerler eynidir
+```
 
 
 
