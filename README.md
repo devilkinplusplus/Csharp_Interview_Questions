@@ -1276,6 +1276,33 @@ Console.WriteLine(myBike == motorbike); //false çünki referanslar ferqlidir
 Console.WriteLine(myBike.Equals(motorbike)); //true esas deyerler eynidir
 ```
 
+## 52) IQueryable və IEnumerable arasındakı fərqlər nələrdir? ##
+**IQueryable dataları uzaq mənbədən (database,web service) gətirmək üçün istifadə olunur, dataları database tərəfdə filter və s.-dan keçirir və ram-a gətirir ammaaa `execute` etmir, sadəcə gətirir.**
+
+***IEnumerable isə dataları gətirir işə salır sonra filter və s. icra edir.***
+
+> Aşağıdakı entity framework ilə bir IQueryable nümunəsidir
+```
+_context.Products.Where(x=>x.IsDeleted == false); //deyerler ram-a getirildi,bu hisseye qeder olan kod IQueryable dönür
+```
+> Bu deyerleri execute etmek üçün `ToList()` və bənzəri metod istifadə etməliyik, bu zaman dəyərimiz IQueryable-dan IEnumerable-a keçir.
+```
+_context.Products.Where(x=>x.IsDeleted == false).ToList(); //ram-dakı datalar execute edildi, bu kod IEnumerable dönür
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
