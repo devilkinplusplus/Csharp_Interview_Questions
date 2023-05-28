@@ -1290,14 +1290,63 @@ _context.Products.Where(x=>x.IsDeleted == false); //deyerler ram-a getirildi,bu 
 _context.Products.Where(x=>x.IsDeleted == false).ToList(); //ram-dakı datalar execute edildi, bu kod IEnumerable dönür
 ```
 
+## 53) Singleton design patterni açıqla.
+**Bu patterndə istifadəçiyə özbaşına obyekt yaratmağa icazə verilmir, yəni istifadəçi `new` ilə obyekt yarada bilməz.
+İstifadəçi bizdən obyekt tələb edə bilər, bu tələbə cavab olaraq biz də istifadəçiyə yaddaşda var olan obyekti verəcəyik.
+Beləcə istifadəçi yalnızca bir obyekt ilə işləməli olacaq.Bir iş üçün 50 fərqli obyekt yaratmaq yerinə sadəcə 1 obyekt ilə işi görməli olduğumuz senaryolarda istifadə edə bilərik**
 
+> İndi keçək dediklərimizi koda salmağa, ilk başda istifadəçinin yeni obyekt yaratmasına imkan verməməliyik, bunun üçün constructor metodu `private` etmək kifayətdir.
+```
+    class Singleton
+    {
+        private Singleton(){}
+    }    
+```
+> İstifadəçi constructoru istifadə edərək obyekt yarada bilməyəcəyi üçün ona obyekti biz verməliyik,bunun üçün də həmin class tipində obyekt dönən bir metod yaxud properti yaza bilərik.
+```
+    class Singleton
+    {
+        //Private edərək bu classdan obyekt yaradılmasına imkan vermirik
+        private Singleton(){}
+        
+        //Obyekt tələb olunarkən bu property-ni göndərəcəyik
+        private static Singleton Instance;
 
+        //Yuxarıdakı propertinin null olub olmadığını yoxladıqdan sonra göndəririk
+        public static Singleton GetInstance() => Instance ?? (Instance = new Singleton());
+     }   
+```
 
+> Bu şəkildə Singleton patterni tətbiq edə bilərik,və artıq hər yeni obyekt tələb olunan zaman yaddaşdakı obyekti verəcəyik, yoxlamaq üçün..
+```
+Singleton obj = Singleton.GetInstance();
+Singleton obj2 = Singleton.GetInstance();
 
+if(obj == obj2)
+    Console.WriteLine("Same");
+```
+> If bloku çalışması obyektlərin referansının eyni olduğunu göstərir
 
+**Yuxarıdakı kod Singleton patterninin metod ilə tətbiqidir,Singleton patternini properti ilə tətbiq etmək üçün aşağıdakı koddan istifadə edə bilərik**
+```
+    class Singleton
+    {
+         //Private edərək bu classdan obyekt yaradılmasına imkan vermirik
+         private Singleton(){}
+         
+         //null kontroluna ehtiyac yoxdur
+         public static Singleton GetInstanceProp
+         {
+            get { return Instance; }
+         }
 
-
-
+         //Statik constructor sadəcə 1 dəfə obyekt yaradılarkən çalışır,ən birinci işə düşəndir
+         static Singleton()
+         {
+            Instance = new Singleton();
+         }
+     }   
+```
 
 
 
