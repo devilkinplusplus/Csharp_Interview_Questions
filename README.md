@@ -1325,7 +1325,7 @@ Singleton obj2 = Singleton.GetInstance();
 if(obj == obj2)
     Console.WriteLine("Same");
 ```
-> If bloku çalışması obyektlərin referansının eyni olduğunu göstərir
+> If blokunun çalışması obyektlərin referansının eyni olduğunu göstərir
 
 **Yuxarıdakı kod Singleton patterninin metod ilə tətbiqidir,Singleton patternini properti ilə tətbiq etmək üçün aşağıdakı koddan istifadə edə bilərik**
 ```
@@ -1333,6 +1333,9 @@ if(obj == obj2)
     {
          //Private edərək bu classdan obyekt yaradılmasına imkan vermirik
          private Singleton(){}
+         
+         //Obyekt tələb olunarkən bu property-ni göndərəcəyik
+         private static Singleton Instance;
          
          //null kontroluna ehtiyac yoxdur
          public static Singleton GetInstanceProp
