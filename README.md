@@ -364,7 +364,9 @@ cities = cities2; // İki referansı tipi bir-birinə mənimsədən zaman onlar�
 ![valref2](https://user-images.githubusercontent.com/96441243/218277772-2b0fb5c9-764a-49fc-8a9f-0ce0cadb8ae1.png)
 > `cities = cities2` nəticəsi şəkildəki kimi olacaq , 2 adres də eyni referansa yönələcək. Nümunəyə davam edək..
 
-***Referans tipli dəyişkənlərin bir-birinə mənimsədilməsi ilə yaddaşdakı adreslərin kopyalanmasına Shallow Copy deyilir***
+***Referans tipli dəyişkənlərin bir-birinə mənimsədilməsi ilə yaddaşdakı adreslərin kopyalanmasına Shallow Copy deyilir.***
+
+***Obyektlərin kopyalanması əməliyyatına Deep Copy deyilir***
 ```
 cities[0] = "Naxçıvan";
 ```
